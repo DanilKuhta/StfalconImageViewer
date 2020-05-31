@@ -30,5 +30,5 @@ public interface ImageLoader<T> {
      * @param imageView an {@link ImageView} object where the image should be loaded
      * @param image     image data from which image should be loaded
      */
-    void loadImage(ImageView imageView, T image);
+    void loadImage(ImageView imageView, ImageView playVideoView, T image);
 }

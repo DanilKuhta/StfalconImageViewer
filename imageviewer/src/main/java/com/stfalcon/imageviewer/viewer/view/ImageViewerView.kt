@@ -190,7 +190,7 @@ internal class ImageViewerView<T> @JvmOverloads constructor(
 
         externalTransitionImageView = transitionImageView
 
-        imageLoader?.loadImage(this.transitionImageView, images[startPosition])
+        imageLoader?.loadImage(this.transitionImageView, null, images[startPosition])
         this.transitionImageView.copyBitmapFrom(transitionImageView)
 
         transitionImageAnimator = createTransitionImageAnimator(transitionImageView)
@@ -220,7 +220,7 @@ internal class ImageViewerView<T> @JvmOverloads constructor(
         externalTransitionImageView = imageView
         startPosition = currentPosition
         transitionImageAnimator = createTransitionImageAnimator(imageView)
-        imageLoader?.loadImage(transitionImageView, images[startPosition])
+        imageLoader?.loadImage(transitionImageView, null, images[startPosition])
     }
 
     internal fun resetScale() {

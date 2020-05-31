@@ -17,9 +17,12 @@
 package com.stfalcon.imageviewer.viewer.adapter
 
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import com.github.chrisbanes.photoview.PhotoView
+import com.stfalcon.imageviewer.R
 import com.stfalcon.imageviewer.common.extensions.resetScale
 import com.stfalcon.imageviewer.common.pager.RecyclingPagerAdapter
 import com.stfalcon.imageviewer.loader.ImageLoader
@@ -38,12 +41,13 @@ internal class ImagesPagerAdapter<T>(
         holders.firstOrNull { it.position == position }?.isScaled ?: false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val photoView = PhotoView(context).apply {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.image_pager_item, parent, false)
+        (itemView.findViewById<PhotoView>(R.id.photoview) as PhotoView).apply {
             isEnabled = isZoomingAllowed
             setOnViewDragListener { _, _ -> setAllowParentInterceptOnEdge(scale == 1.0f) }
         }
 
-        return ViewHolder(photoView).also { holders.add(it) }
+        return ViewHolder(itemView).also { holders.add(it) }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(position)
@@ -64,11 +68,12 @@ internal class ImagesPagerAdapter<T>(
         internal var isScaled: Boolean = false
             get() = photoView.scale > 1f
 
-        private val photoView: PhotoView = itemView as PhotoView
+        private val photoView: PhotoView = itemView.findViewById(R.id.photoview) as PhotoView
+        private val playView: ImageView = itemView.findViewById(R.id.play) as ImageView
 
         fun bind(position: Int) {
             this.position = position
-            imageLoader.loadImage(photoView, images[position])
+            imageLoader.loadImage(photoView, playView, images[position])
         }
 
         fun resetScale() = photoView.resetScale(animate = true)
