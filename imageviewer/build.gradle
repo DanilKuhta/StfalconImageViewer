@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 29
@@ -11,16 +11,6 @@ android {
         versionCode 1
         versionName "1.0"
     }
-}
-
-publish {
-    userOrg = 'troy379'
-    groupId = 'com.github.stfalcon'
-    artifactId = 'stfalcon-imageviewer'
-    publishVersion = '1.0.1'
-    desc = 'A customizable full-screen image viewer with shared image transition support, "pinch to zoom" and "swipe to dismiss" gestures.'
-    uploadName='StfalconImageViewer'
-    website = 'https://github.com/stfalcon-studio/StfalconImageViewer'
 }
 
 dependencies {
